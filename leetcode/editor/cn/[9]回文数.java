@@ -29,7 +29,27 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean isPalindrome(int x) {
+        return this.isPalindrome1(x);
+    }
 
+    public boolean isPalindrome1(int x) {
+        /**
+         * 方案一：
+         *      将整数作为一个字符串处理
+         *      优点：思路清晰，实现起来比较容易
+         *      缺点：空间复杂度较高，需要存储大量的临时字符串
+         * 提交结果：
+         * 解答成功:
+         * 			执行耗时:22 ms,击败了6.41% 的Java用户
+         * 			内存消耗:39.4 MB,击败了5.14% 的Java用户
+         */
+        String intStr = String.valueOf(x);
+        char[] chars = intStr.toCharArray();
+        String newStr = "";
+        for (int i = chars.length - 1; i >= 0; i--) {
+            newStr = newStr + String.valueOf(chars[i]);
+        }
+        return intStr.equals(newStr);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

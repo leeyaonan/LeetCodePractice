@@ -21,7 +21,14 @@ class Solution {
 
     public int[] twoSum(int[] nums, int target) {
 
-        /*
+//        return this.twoSum1(nums, target);
+
+        return this.twoSum2(nums, target);
+
+    }
+
+    public int[] twoSum1(int[] nums, int target) {
+         /*
         * 方案一：穷举法
         *   遍历两次数组，以和为key，数组下标为value，放入hashmap，再根据target从中取出结果数组
         * 优点：对于静态nums，一旦初始化后，可以很快获取结果集，空间换时间
@@ -34,7 +41,7 @@ class Solution {
 			stdout:
 			null
         * */
-        /*HashMap<Integer, int[]> hashMap = new HashMap<Integer, int[]>();
+        HashMap<Integer, int[]> hashMap = new HashMap<Integer, int[]>();
 
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums.length; j++) {
@@ -46,11 +53,11 @@ class Solution {
                 hashMap.put(sum, indexs);
             }
         }
-        return hashMap.get(target);*/
+        return hashMap.get(target);
+    }
 
-        //==========================================分隔线==========================================
-
-        /*
+    public int[] twoSum2(int[] nums, int target) {
+         /*
         * 方案二：
         *   边离数组，将元素与下标的映射关系存入hashmap，再次边离数组，根据target和元素的差值找对应另一个元素的下标
         *

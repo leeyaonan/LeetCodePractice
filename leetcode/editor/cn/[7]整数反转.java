@@ -27,6 +27,14 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int reverse(int x) {
+//        return this.reverse1(x);
+
+//        return this.reverse2(x);
+
+        return this.reverse3(x);
+    }
+
+    public int reverse1(int x) {
         /**
          * 方案一：
          *      翻转字符串，并根据条件进行修改，然后解析为数字
@@ -39,25 +47,27 @@ class Solution {
          *      时间复杂度和空间复杂度都比较大，
          *      而且关于溢出的问题实际上采用了取巧的方式，并没有严格的判断溢出
          */
-//        String intStr = String.valueOf(x);
-//        char[] chars = intStr.toCharArray();
-//        String newStr = "";
-//        for (int i = chars.length - 1; i >= 0; i--) {
-//            newStr = newStr + String.valueOf(chars[i]);
-//        }
-//        if (newStr.endsWith("-")) {
-//            newStr = "-" + newStr.substring(0, newStr.length() - 1);
-//        }
-//        Integer result;
-//        try {
-//            result = Integer.parseInt(newStr);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return 0;
-//        }
-//        return result;
-        //==========================================分隔线==========================================
+        String intStr = String.valueOf(x);
+        char[] chars = intStr.toCharArray();
+        String newStr = "";
+        for (int i = chars.length - 1; i >= 0; i--) {
+            newStr = newStr + String.valueOf(chars[i]);
+        }
+        if (newStr.endsWith("-")) {
+            newStr = "-" + newStr.substring(0, newStr.length() - 1);
+        }
+        Integer result;
+        try {
+            result = Integer.parseInt(newStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return result;
 
+    }
+
+    public int reverse2(int x) {
         /**
          * 方案二（参考）：
          *      把整数当作一个栈，进行出栈，末尾数字先出栈，再相加成为反转后的数字
@@ -77,28 +87,31 @@ class Solution {
          * 			执行耗时:1 ms,击败了100.00% 的Java用户
          * 			内存消耗:37.2 MB,击败了5.33% 的Java用户
          */
-//        int rev = 0;
-//        while(x != 0) {
-//            int pop = x % 10;
-//            x /= 10;
-//            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
-//            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
-//            rev = rev * 10 + pop;
-//        }
-//        return rev;
-        //==========================================分隔线==========================================
+        int rev = 0;
+        while(x != 0) {
+            int pop = x % 10;
+            x /= 10;
+            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
+            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
+    }
+
+    public int reverse3(int x) {
         /**
          * 简化：
          * 解答成功:
-         * 			执行耗时:2 ms,击败了41.46% 的Java用户
+         * 			执行耗时:1 ms,击败了100.00% 的Java用户
          * 			内存消耗:37.1 MB,击败了5.33% 的Java用户
-          */
+         */
         long res = 0;
         while (x != 0) {
             res = res * 10 + x % 10;
             x /= 10;
         }
         return (int) res == res ? (int) res : 0;
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
