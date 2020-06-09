@@ -24,7 +24,10 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
+        /*
+        * 方案一：
+        *   分别将两个链表表示的数字求出来，相加得到结果后再创建节点返回
+        * */
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
