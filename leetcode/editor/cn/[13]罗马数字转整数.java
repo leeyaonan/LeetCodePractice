@@ -56,7 +56,68 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int romanToInt(String s) {
+        return this.romanToInt1(s);
+    }
 
+    public static final String I = "I";
+    public static final String V = "V";
+    public static final String X = "X";
+    public static final String L = "L";
+    public static final String C = "C";
+    public static final String D = "D";
+    public static final String M = "M";
+    public static final HashMap<String, Integer> ROMANS_2_INT = new HashMap<>(){{
+        put(I, 1);
+        put(V, 5);
+        put(X, 10);
+        put(L, 50);
+        put(C, 100);
+        put(D, 500);
+        put(M, 1000);
+    }};
+
+    public int romanToInt1(String s) {
+        /**
+         * 方案一：
+         *      从右向左顺序读取数字，游标记录当前位置的数字游标
+         *      当当前数字右边没有数字，或者右边数字小于等于当前数字时，就加上该数
+         *      当当前数字右边数字大于当前数字时，就减去该数字
+         * 执行结果：
+         * 解答成功:
+         * 			执行耗时:9 ms,击败了26.16% 的Java用户
+         * 			内存消耗:40.2 MB,击败了5.56% 的Java用户
+         */
+        char[] chars = s.toCharArray();
+        int result = 0;
+
+        int current = chars.length - 1;
+        int right = chars.length;
+
+        while(current >= 0) {
+            // current是右边第一位数字,直接相加
+            if (right > chars.length - 1) {
+                result += ROMANS_2_INT.get(String.valueOf(chars[current]));
+                right = current--;
+            } else {
+                if (ROMANS_2_INT.get(String.valueOf(chars[current])) >= ROMANS_2_INT.get(String.valueOf(chars[right]))) {
+                    result += ROMANS_2_INT.get(String.valueOf(chars[current]));
+                    right = current--;
+                }
+                else {
+                    result -= ROMANS_2_INT.get(String.valueOf(chars[current]));
+                    right = current--;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public int getIntByRoman(String roman) {
+        if (!ROMANS_2_INT.containsKey(roman)) {
+            return 0;
+        }
+        return ROMANS_2_INT.get(roman);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
